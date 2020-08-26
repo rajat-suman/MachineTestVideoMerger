@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="mainVM"
+            type="com.apptunix.main.MainVM" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".main.MainActivity">
+
+        <Button
+            android:id="@+id/btCapture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->mainVM.clicks(`camera`)}"
+            android:text="Capture Video"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toTopOf="@id/btPick"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvCapture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dp"
+            android:singleLine="true"
+            android:text="@{mainVM.captureText}"
+            app:layout_constraintBottom_toTopOf="@id/btPick"
+            app:layout_constraintTop_toBottomOf="@id/btCapture" />
+
+        <Button
+            android:id="@+id/btPick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->mainVM.clicks(`gallery`)}"
+            android:text="Pick From Gallery"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toTopOf="@id/btMerge"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btCapture" />
+
+        <TextView
+            android:id="@+id/tvPick"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dp"
+            android:singleLine="true"
+            android:text="@{mainVM.pickText}"
+            app:layout_constraintBottom_toTopOf="@id/btMerge"
+            app:layout_constraintTop_toBottomOf="@id/btPick" />
+
+        <Button
+            android:id="@+id/btMerge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->mainVM.clicks(`merge`)}"
+            android:text="Merge"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btPick" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
