@@ -3,11 +3,9 @@ package com.apptunix.main
 import VideoHandle.EpEditor
 import VideoHandle.EpVideo
 import VideoHandle.OnEditorListener
-import android.Manifest
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
@@ -15,6 +13,7 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
+import com.apptunix.utils.PermissionManager
 import com.apptunix.utils.Util.dismissProgress
 import com.apptunix.utils.Util.openVideoAlert
 import com.apptunix.utils.Util.showProgress
@@ -67,20 +66,7 @@ class MainVM(private val context: Context, private val mainActivity: MainActivit
     @RequiresApi(Build.VERSION_CODES.M)
     private fun checkPermissions() {
         try {
-            var list = ArrayList<String>()
-            if (mainActivity.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                list.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                list.add(Manifest.permission.READ_EXTERNAL_STORAGE)
-            }
-            if (mainActivity.checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                list.add(Manifest.permission.CAMERA)
-            }
-            if (mainActivity.checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
-                list.add(Manifest.permission.RECORD_AUDIO)
-            }
-            if (mainActivity.checkSelfPermission(Manifest.permission.WAKE_LOCK) != PackageManager.PERMISSION_GRANTED) {
-                list.add(Manifest.permission.WAKE_LOCK)
-            }
+            var list = PermissionManager.getPermissionsList(context)
 
             if (list.isNotEmpty()) {
                 mainActivity.requestPermissions(list.toTypedArray(), 101)
@@ -123,7 +109,6 @@ class MainVM(private val context: Context, private val mainActivity: MainActivit
             e.printStackTrace()
         }
     }
-
 
     private fun mergeVideos() {
         try {

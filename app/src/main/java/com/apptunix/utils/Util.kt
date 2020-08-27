@@ -38,6 +38,7 @@ object Util {
 
         progressAlert = customAlertBuilder.create()
         progressAlert!!.show()
+        progressAlert!!.setCanceledOnTouchOutside(false)
 
         progressAlert!!.window!!.setBackgroundDrawable(ColorDrawable(Color.WHITE))
     }
@@ -72,7 +73,7 @@ object Util {
 
         openVideoAlert = customAlertBuilder.create()
         openVideoAlert!!.show()
-
+        openVideoAlert!!.setCanceledOnTouchOutside(false)
         openVideoAlert!!.window!!.setBackgroundDrawable(ColorDrawable(Color.WHITE))
     }
 
